@@ -21,6 +21,11 @@ module.exports = class Center extends Sequelize.Model {
                 type: Sequelize.CHAR(11),
                 allowNull: true,
             },
+            center_number: {
+                type: Sequelize.CHAR(15),
+                allowNull: true,
+                unique: true
+            }
         }, {
             sequelize,
             timestamps: false,
@@ -36,5 +41,6 @@ module.exports = class Center extends Sequelize.Model {
         db.Center.hasMany(db.Notice, { foreignKey: 'center_id', onDelete: 'CASCADE' })
         db.Center.hasMany(db.Class, { foreignKey: 'center_id', onDelete: 'CASCADE' })
         db.Center.hasMany(db.Voucher, { foreignKey: 'center_id', onDelete: 'CASCADE' })
+        db.Center.belongsTo(db.Admin, { foreignKey: 'admin_id' })
     }
 }

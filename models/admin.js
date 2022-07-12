@@ -1,9 +1,9 @@
 const Sequelize = require('sequelize');
 
-module.exports = class User extends Sequelize.Model {
+module.exports = class Admin extends Sequelize.Model {
     static init(sequelize) {
         return super.init({
-            user_id: {
+            admin_id: {
                 type: Sequelize.INTEGER.UNSIGNED,
                 allowNull: false,
                 primaryKey: true,
@@ -19,27 +19,27 @@ module.exports = class User extends Sequelize.Model {
             },
             phone: {
                 type: Sequelize.CHAR(11),
-                allowNull: true,
+                allowNull: false,
             },
             email: {
                 type: Sequelize.STRING(25),
                 allowNull: false,
-                unique: true
             },
+            user_pw: {
+                type: Sequelize.STRING(100),
+                allowNull: false
+            }
         }, {
             sequelize,
             timestamps: false,
-            modelName: 'User',
-            tableName: 'users',
+            modelName: 'Admin',
+            tableName: 'admins',
             paranoid:  false,
             charset: 'utf8',
             collate: 'utf8_general_ci'
         })
     }
     static associate(db) {
-        db.User.belongsToMany(db.Center, { through: db.Member, foreignKey: 'user_id' })
-        db.User.belongsToMany(db.Class, { through: 'instructor', foreignKey: 'user_id' })
-        db.User.belongsToMany(db.Class_Date, { through: db.Take_Class, foreignKey: 'user_id' })
-        db.User.belongsToMany(db.Voucher, { through: db.User_Voucher, foreignKey: 'user_id' })
+        db.Admin.hasMany(db.Center, { foreignKey: 'admin_id', onDelete: 'CASCADE' })
     }
 }
