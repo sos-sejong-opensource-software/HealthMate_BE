@@ -18,14 +18,14 @@ module.exports = class Admin extends Sequelize.Model {
                 allowNull: false,
             },
             phone: {
-                type: Sequelize.CHAR(11),
+                type: Sequelize.CHAR(14),
                 allowNull: false,
             },
             email: {
                 type: Sequelize.STRING(25),
                 allowNull: false,
             },
-            user_pw: {
+            pw: {
                 type: Sequelize.STRING(100),
                 allowNull: false
             }

@@ -18,7 +18,7 @@ module.exports = class User extends Sequelize.Model {
                 allowNull: false,
             },
             phone: {
-                type: Sequelize.CHAR(11),
+                type: Sequelize.CHAR(14),
                 allowNull: true,
             },
             email: {
